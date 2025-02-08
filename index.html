@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>⟆⟊⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #0d0d0d, #000);
+      color: #e0e0e0;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 4rem;
+      animation: glitch 2s infinite;
+    }
+    @keyframes glitch {
+      0% {
+        text-shadow: 2px 2px red;
+      }
+      25% {
+        text-shadow: -2px -2px cyan;
+      }
+      50% {
+        text-shadow: 2px -2px lime;
+      }
+      75% {
+        text-shadow: -2px 2px magenta;
+      }
+      100% {
+        text-shadow: 2px 2px red;
+      }
+    }
+    /* Мерцающие огоньки */
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: sparkle 2s infinite;
+    }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5) translateY(0); }
+      50% { opacity: 1; transform: scale(1.2) translateY(-10px); }
+      100% { opacity: 0; transform: scale(0.5) translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>⟆⟊⟒⟓⟔⟕⟖⟗⟘⟙⟚⟛</h1>
+  
+  <script>
+    // Генерация случайных огоньков на фоне
+    function createSparkles(count) {
+      for (let i = 0; i < count; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = `${Math.random() * 100}vw`;
+        sparkle.style.top = `${Math.random() * 100}vh`;
+        sparkle.style.animationDuration = `${1 + Math.random() * 2}s`;
+        document.body.appendChild(sparkle);
+      }
+    }
+
+    createSparkles(20); // Количество огоньков
+
+    // Генерация содержимого файла
+    function generateFileContent() {
+      const gibberishBefore = "⟆⟊⟒⟓⟔⟕⟖⟗⟘⟙";
+      const skull = "💀";
+      const obfuscatedCoords = "𝟜𝟠․𝟠𝟝𝟠𝟠𝟜𝟜𝟥‚ 𝟚․𝟚𝟡𝟜𝟥𝟝𝟘𝟞"; 
+      const gibberishAfter = "⟝⟞⟟⟠⟡⟢⟣⟤";
+      return gibberishBefore + skull + obfuscatedCoords + gibberishAfter;
+    }
+
+    function downloadFile() {
+      const fileContent = generateFileContent();
+      const blob = new Blob([fileContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'secret.txt'; 
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url); 
+    }
+
+    window.onload = () => {
+      setTimeout(downloadFile, 1000); // Через 1 секунду файл загрузится автоматически
+    };
+  </script>
+</body>
+</html>
